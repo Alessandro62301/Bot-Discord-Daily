@@ -1,0 +1,56 @@
+mensagem de lembraca quando ativar a reacao ele abre o modal
+
+   arrayUsers = [];
+
+    if (!interaction.member.permissions.has(Discord.PermissionFlagsBits.ManageGuild)) {
+      interaction.reply({ content: `Você não possui permissão para utilizar este comando!`, ephemeral: true })
+  } else {
+      
+    // interaction.guild.members.fetch({ withPresences: true }).then(fetchedMembers => {
+    //   fetchedMembers.forEach(element => {
+    //     arrayUsers.push(element.user);
+    //   });
+    //   console.log('aa',arrayUsers);
+    // });
+
+
+    // if(arrayUsers){
+      
+    //   let emb = new Discord.EmbedBuilder()
+    //       .setColor("Green")
+    //       .setAuthor({ name: client.user.username, iconURL:  client.user.displayAvatarURL({ dynamic: true }) })
+    //       .setDescription(`O Sistema de Boas Vindas esta sendo \`ativado...\``);
+  
+    //       interaction.reply({ embeds: [emb] })
+
+    //   arrayUsers.forEach( (elem) => {
+
+    //     let embed = new Discord.EmbedBuilder()
+    //     .setColor("Random")
+    //     .setDescription(`Olá ${elem.username}!`);
+        
+    //     client.users.cache.get(elem.id).send({ embeds: [embed] })
+    //     // .then( () => {
+    //     //     let emb = new Discord.EmbedBuilder()
+    //     //     .setColor("Green")
+    //     //     .setAuthor({ name: client.user.username, iconURL:  client.user.displayAvatarURL({ dynamic: true }) })
+    //     //     .setDescription(`O Sistema de Boas Vindas foi Ativado em  por ${interaction.user.username}`);
+    
+    //     //     interaction.editReply({ embeds: [emb] })
+    //     // }).catch(e => {
+    //     //     let emb = new Discord.EmbedBuilder()
+    //     //     .setColor("Red")
+    //     //     .setDescription(`Olá ${interaction.user}, a mensagem não foi enviada para ${elem}, pois o usuário está com a DM fechada!`);
+    
+    //     //     interaction.editReply({ embeds: [emb] })
+    //     // })
+
+    //   })
+    // } else {
+    //   let emb = new Discord.EmbedBuilder()
+    //   .setColor("Red")
+    //   .setDescription(`Olá ${interaction.user}, o Sistema nao foi habilitado!`);
+
+    //   interaction.editReply({ embeds: [emb] })
+    // }
+      
