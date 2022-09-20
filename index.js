@@ -1,8 +1,9 @@
 const Discord = require("discord.js")
 const daily = require('./functions/daily.js');
 const modalDaily = require('./functions/modalDaily.js');
-
 const dotenv = require('dotenv');
+const clear = require("./functions/clear.js");
+
 dotenv.config();
 
 const client = new Discord.Client({ 
@@ -36,17 +37,25 @@ let channel;
 client.on('ready', () => {
   console.log(`🔥 Estou online em ${client.user.username}!`)
 
-  channel = client.channels.cache.get('1021792495601987655');
+  channel = client.channels.cache.get('1021846022999261244');
 })
 
 setTimeout(() => {
+
+  clear.run(client, channel);
+
   daily.run(client , channel);
 
   client.on('interactionCreate', interaction => {
     if (!interaction.isButton()) return;
-      modalDaily.run(client , interaction);
-  });
 
+    try {
+      modalDaily.run(client , interaction);
+    }catch(e){
+      console.log(e);
+    }
+
+  });
 
   console.log('daily on');
 }, 2000);

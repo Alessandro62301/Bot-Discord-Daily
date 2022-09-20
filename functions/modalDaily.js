@@ -50,14 +50,23 @@ module.exports = {
  	 	channelFinal = client.channels.cache.get('1021835469518020780');
 
 			let emb = new Discord.EmbedBuilder()
-			.setColor("Green")
-			.setAuthor({
-				name: client.user.username,
-				iconURL: client.user.displayAvatarURL({
-					dynamic: true
-				})
-			})
-			.setDescription(`Dev : ${interaction.user.username}\n${projectName}\n${objetivo}\n${makeDo}`);
+			.setColor(0x0099FF)
+			.setTitle(`Projeto: ${projectName}`)
+			.setAuthor({ name: interaction.user.username, iconURL: interaction.user.displayAvatarURL({ dynamic: true })})
+			// .setDescription(`Objetivo do Dia: ${objetivo}`)
+			.setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
+			.addFields(
+				{ name: 'Objetivo do Dia:', value: objetivo },
+				// { name: '\u200B', value: '\u200B' },
+				{ name: 'Oque foi feito', value: makeDo },
+				// { name: '\u200B', value: '\u200B' },
+				// { name: 'Inline field title', value: 'Some value here', inline: true },
+				// { name: 'Inline field title', value: 'Some value here', inline: true },
+			)
+			// .addFields({ name: 'Inline field title', value: 'Some value here', inline: true })
+			.setTimestamp()
+			.setFooter({ text: `${interaction.user.username} - Codezone`, iconURL: client.user.displayAvatarURL({ dynamic: true }) });
+		
 
 			channelFinal.send({
 			embeds: [emb],
@@ -68,9 +77,11 @@ module.exports = {
 				})
 				.setColor("Green")
 				.setDescription(`Sua Daily foi enviada com Sucesso!`)
+				.setTimestamp()
 
 			interaction.reply({
-				embeds: [embed]
+				embeds: [embed],
+				ephemeral: true
 			});
 		})
 

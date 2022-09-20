@@ -30,7 +30,6 @@ module.exports = {
         })
         .setDescription(`Está na Hora da \`Daily\``);
 
-
         channel.send({
         embeds: [emb],
         ephemeral: true,
