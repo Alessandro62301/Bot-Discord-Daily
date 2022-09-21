@@ -2,7 +2,8 @@ const {
 	ActionRowBuilder,
 	ModalBuilder,
 	TextInputBuilder,
-	TextInputStyle
+	TextInputStyle,
+	SelectMenuBuilder
 } = require('discord.js');
 const Discord = require('discord.js');
 
@@ -33,9 +34,28 @@ module.exports = {
 			.setLabel("Oque foi feito?")
 			.setStyle(TextInputStyle.Paragraph);
 
+		// const statusInput = new SelectMenuBuilder()
+		// 	.setCustomId('statusId')
+		// 	.setPlaceholder('Nothing selected')
+		// 	.addOptions(
+		// 		{
+		// 			label: 'Select me',
+		// 			description: 'This is a description',
+		// 			value: 'first_option',
+		// 		},
+		// 		{
+		// 			label: 'You can select me too',
+		// 			description: 'This is also a description',
+		// 			value: 'second_option',
+		// 		},
+		// 	);
+		
+
+		
 		const firstActionRow = new ActionRowBuilder().addComponents(projectNameInput);
 		const secondActionRow = new ActionRowBuilder().addComponents(objetivoInput);
 		const thirdActionRow = new ActionRowBuilder().addComponents(makeDoInput);
+		// const fourthActionRow = new ActionRowBuilder().addComponents(statusInput);
 
 		modal.addComponents(firstActionRow, secondActionRow, thirdActionRow);
 
@@ -46,27 +66,23 @@ module.exports = {
 			const projectName = interaction.fields.getTextInputValue('projectName');
 			const objetivo = interaction.fields.getTextInputValue('objetivo');
 			const makeDo = interaction.fields.getTextInputValue('makeDo');
+			// const status = interaction.options.get('statusId').value;
 
- 	 	channelFinal = client.channels.cache.get('1021835469518020780');
+ 	 		channelFinal = client.channels.cache.get('1021835469518020780');
 
 			let emb = new Discord.EmbedBuilder()
-			.setColor(0x0099FF)
+			.setColor(0xFD6D30)
 			.setTitle(`Projeto: ${projectName}`)
 			.setAuthor({ name: interaction.user.username, iconURL: interaction.user.displayAvatarURL({ dynamic: true })})
 			// .setDescription(`Objetivo do Dia: ${objetivo}`)
 			.setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
 			.addFields(
 				{ name: 'Objetivo do Dia:', value: objetivo },
-				// { name: '\u200B', value: '\u200B' },
 				{ name: 'Oque foi feito', value: makeDo },
-				// { name: '\u200B', value: '\u200B' },
-				// { name: 'Inline field title', value: 'Some value here', inline: true },
-				// { name: 'Inline field title', value: 'Some value here', inline: true },
+				// { name: 'Status', value: status },
 			)
-			// .addFields({ name: 'Inline field title', value: 'Some value here', inline: true })
 			.setTimestamp()
 			.setFooter({ text: `${interaction.user.username} - Codezone`, iconURL: client.user.displayAvatarURL({ dynamic: true }) });
-		
 
 			channelFinal.send({
 			embeds: [emb],

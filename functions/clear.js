@@ -11,9 +11,9 @@ module.exports = {
   //   required: true,
   // }],
 
-  run: async (client, channel) => {
+  run: async (client, channel, num = 99) => {
 
-    channel.bulkDelete(99)
+    channel.bulkDelete(num)
     .then(messages => console.log(`Bulk deleted ${messages.size} messages`))
     .catch(console.error);
 

@@ -40,10 +40,10 @@ client.on('ready', () => {
   channel = client.channels.cache.get('1021846022999261244');
 })
 
-setInterval(() => {
-  date = new Date();
+setTimeout(() => {
+  const date = new Date();
 
-  if(date.getHours() == 18 && date.getMinutes() == 18){
+  if(date.getHours()){
     clear.run(client, channel)
     setTimeout(() => {
       daily.run(client , channel);
@@ -51,22 +51,16 @@ setInterval(() => {
   
     client.on('interactionCreate', interaction => {
       if (!interaction.isButton()) return;
-  
-      try {
         modalDaily.run(client , interaction);
-      }catch(e){
-        console.log(e);
-      }
-  
     });
     console.log('daily on');
   } else {
     console.log('daily off');
-    if(date.getHours() != 18){
+    if(date.getHours() != 8){
       clear.run(client, channel)
     }
   }
-}, 1000 * 60);
+}, 2000);
 
 
 
@@ -76,3 +70,22 @@ client.slashCommands = new Discord.Collection()
 require('./functions/index.js')(client)
 
 client.login(process.env.TOKEN)
+
+
+process.on('multipleResolves', (type, reason, promise) => {
+  console.log(`🚫 Erro Detectado\n\n` + type, promise, reason)
+});
+process.on('unhandRejection', (reason, promise) => {
+  console.log(`🚫 Erro Detectado:\n\n` + reason, promise)
+});
+process.on('uncaughtException', (error, origin) => {
+  console.log(`🚫 Erro Detectado:\n\n` + error )
+});
+process.on('uncaughtExceptionMonitor', (error, origin) => {
+  console.log(`🚫 Erro Detectado:\n\n` + error )
+});
+process.on('InteractionAlreadyReplied', (error) => {
+  channelFinal = client.channels.cache.get('1021835469518020780');
+  clear.run(client, channelFinal , 1);
+  console.log(`🚫 Erro Detectado:\n\n` + error, origin)
+});
