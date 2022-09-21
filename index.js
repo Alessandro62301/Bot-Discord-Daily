@@ -40,25 +40,34 @@ client.on('ready', () => {
   channel = client.channels.cache.get('1021846022999261244');
 })
 
-setTimeout(() => {
+setInterval(() => {
+  date = new Date();
 
-  clear.run(client, channel);
-
-  daily.run(client , channel);
-
-  client.on('interactionCreate', interaction => {
-    if (!interaction.isButton()) return;
-
-    try {
-      modalDaily.run(client , interaction);
-    }catch(e){
-      console.log(e);
+  if(date.getHours() == 18 && date.getMinutes() == 18){
+    clear.run(client, channel)
+    setTimeout(() => {
+      daily.run(client , channel);
+    },2000)
+  
+    client.on('interactionCreate', interaction => {
+      if (!interaction.isButton()) return;
+  
+      try {
+        modalDaily.run(client , interaction);
+      }catch(e){
+        console.log(e);
+      }
+  
+    });
+    console.log('daily on');
+  } else {
+    console.log('daily off');
+    if(date.getHours() != 18){
+      clear.run(client, channel)
     }
+  }
+}, 1000 * 60);
 
-  });
-
-  console.log('daily on');
-}, 2000);
 
 
 
